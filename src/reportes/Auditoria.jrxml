@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="667" pageHeight="595" orientation="Landscape" columnWidth="627" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40eefb79-a8e8-4bf0-9283-ec423e37b5d0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IMAGEN" class="java.io.InputStream"/>
+	<parameter name="FechaActu" class="java.lang.String"/>
+	<parameter name="FechaAnt" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT usuarios.n_usuario, auditorias.hora, auditorias.evento, auditorias.tabla, STR_TO_DATE(auditorias.fecha,'%d/%m/%Y'), auditorias.fecha 
+FROM auditorias, usuarios WHERE STR_TO_DATE(auditorias.fecha, '%d/%m/%Y') BETWEEN STR_TO_DATE($P{FechaAnt}, '%d/%m/%Y') AND STR_TO_DATE($P{FechaActu}, '%d/%m/%Y') 
+AND auditorias.fk_usuario = usuarios.id_usuario 
+ORDER BY auditorias.fecha DESC;]]>
+	</queryString>
+	<field name="n_usuario" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="evento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tabla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="STR_TO_DATE(auditorias.fecha,&apos;%d/%m/%Y&apos;)" class="java.sql.Date"/>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="98">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="669" height="92" forecolor="#0B0B0B" backcolor="#FFFFFF" uuid="eaed4d51-e915-4fc5-ad50-a05dbc4336f0"/>
+				<staticText>
+					<reportElement x="155" y="32" width="429" height="43" forecolor="#0B0B0B" uuid="1b8b6d78-1454-4926-ab91-7e90c38cbea3"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REPORTE DE AUDITORIA]]></text>
+				</staticText>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement x="20" y="20" width="120" height="66" uuid="5d6da0fc-a813-4fb3-b52a-347d2b352130"/>
+					<imageExpression><![CDATA[$P{IMAGEN}]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="669" height="1" forecolor="#666666" uuid="d9618b02-1451-438d-b128-cf5a058da509"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="123" height="20" forecolor="#0B0B0B" backcolor="#CCCCCC" uuid="aea537cb-df4b-44ff-91a4-0c604071f037"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="122" y="0" width="111" height="20" forecolor="#0B0B0B" backcolor="#CCCCCC" uuid="44189752-9234-4d16-8800-1e554e4c092f"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="233" y="0" width="134" height="20" forecolor="#0B0B0B" backcolor="#CCCCCC" uuid="60feb68e-b8a8-4687-b23f-79bab3280d95"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EVENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="367" y="0" width="147" height="20" forecolor="#0B0B0B" backcolor="#CCCCCC" uuid="a1694c1c-045d-49ce-9fc1-5abca7229782"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TABLA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="514" y="0" width="112" height="20" forecolor="#0B0B0B" backcolor="#CCCCCC" uuid="1c0766b8-9039-4bb2-bc0b-634470f672e2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="627" height="1" uuid="1b30c8e8-20f1-43bd-aa7c-e672c94dc9ac"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="123" height="20" uuid="50e29f32-7f8f-43e3-9cda-64ddf3cd73b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="123" y="0" width="111" height="20" uuid="38e92da6-6d43-4f37-bf61-ae51c63b2867"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="234" y="0" width="134" height="20" uuid="218f6ded-ce26-405e-948e-83536fdc14b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="368" y="0" width="147" height="20" uuid="19403d11-ba04-4859-8e88-08d617fccc4e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tabla}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="515" y="0" width="112" height="20" uuid="12afac70-69b3-4cde-932b-096cde823a24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{n_usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="587" height="13" backcolor="#CCCCCC" uuid="0bea5285-838a-438c-8440-b5bd686dcc17"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="587" y="4" width="40" height="13" backcolor="#CCCCCC" uuid="56a33f2d-094a-47a5-a77e-10606baa3545"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="b1570705-d651-4787-ac05-04afe9d98e7c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
